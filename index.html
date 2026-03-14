@@ -1,491 +1,359 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prezzotax - Jouw Internationale Vinted Accelerator</title>
-    <meta name="description" content="Verkoop sneller op Vinted met Prezzotax. AI-analyse van vraagprijs, verkoopprijs en adviesprijs.">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- React & Babel -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrezzoTax – Digitale Downloads</title>
+  <meta name="description" content="Handige digitale planners, gidsen en templates als instant download. Betaal eenvoudig en download direct." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #00B4D8; border-radius: 10px; }
-        .animate-bounce-slow { animation: bounce 3s infinite; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    </style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f7;
+      color: #1a1a1a;
+    }
+
+    /* HEADER */
+    header {
+      background: #1a1a2e;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    header .logo span {
+      color: #e94560;
+    }
+    header nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 0.95rem;
+    }
+    header nav a:hover { color: white; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .hero h1 span { color: #e94560; }
+    .hero p {
+      font-size: 1.15rem;
+      color: #aab;
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #e94560;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* PRODUCTEN */
+    .section-title {
+      text-align: center;
+      padding: 60px 20px 10px;
+    }
+    .section-title h2 {
+      font-size: 2rem;
+      color: #1a1a2e;
+    }
+    .section-title p {
+      color: #666;
+      margin-top: 8px;
+      font-size: 1rem;
+    }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      max-width: 1100px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      width: 320px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.13);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .card-body { padding: 24px; }
+    .card-body h3 { font-size: 1.2rem; margin-bottom: 8px; color: #1a1a2e; }
+    .card-body p { font-size: 0.9rem; color: #666; margin-bottom: 16px; line-height: 1.5; }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px 24px;
+    }
+    .price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .price span {
+      font-size: 0.85rem;
+      color: #999;
+      font-weight: 400;
+    }
+
+    .btn-koop {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-koop:hover { background: #c73650; }
+
+    .badge-nieuw {
+      display: inline-block;
+      background: #e94560;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin-left: 8px;
+      vertical-align: middle;
+      font-weight: 600;
+    }
+
+    /* USP BALK */
+    .usp-bar {
+      background: #1a1a2e;
+      color: white;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      padding: 28px 20px;
+    }
+    .usp-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+    .usp-item .icon { font-size: 1.4rem; }
+
+    /* HOE WERKT HET */
+    .how {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .how h2 { font-size: 1.8rem; color: #1a1a2e; margin-bottom: 36px; }
+    .steps {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .step {
+      background: white;
+      border-radius: 14px;
+      padding: 28px 24px;
+      width: 220px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+    }
+    .step .num {
+      background: #e94560;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin: 0 auto 14px;
+      font-size: 1rem;
+    }
+    .step h4 { font-size: 1rem; color: #1a1a2e; margin-bottom: 8px; }
+    .step p { font-size: 0.85rem; color: #777; line-height: 1.4; }
+
+    /* FOOTER */
+    footer {
+      background: #1a1a2e;
+      color: #888;
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 0.85rem;
+    }
+    footer a { color: #aab; text-decoration: none; margin: 0 10px; }
+    footer a:hover { color: white; }
+    footer .footer-logo { color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+    footer .footer-logo span { color: #e94560; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      header { flex-direction: column; gap: 12px; }
+      .usp-bar { flex-direction: column; gap: 18px; align-items: center; }
+    }
+  </style>
 </head>
-<body class="bg-slate-50">
-    <div id="root"></div>
+<body>
 
-    <!-- Firebase SDKs -->
-    <script type="text/babel" data-type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-        import { getFirestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp, query } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Prezzo<span>Tax</span></div>
+    <nav>
+      <a href="#producten">Producten</a>
+      <a href="#hoe-werkt-het">Hoe werkt het?</a>
+    </nav>
+  </header>
 
-        const { useState, useEffect, useRef, useMemo } = React;
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">⚡ Direct te downloaden</div>
+    <h1>Slimme digitale downloads<br>voor <span>elke dag</span></h1>
+    <p>Handige PDF-planners, gidsen en templates. Betaal eenvoudig en download direct – geen wachttijd.</p>
+    <a href="#producten" class="btn-koop">Bekijk producten</a>
+  </section>
 
-        // --- Config ---
-        const firebaseConfigRaw = window.__firebase_config;
-        let firebaseConfig = null;
-        let isFirebaseConfigured = false;
+  <!-- USP BALK -->
+  <div class="usp-bar">
+    <div class="usp-item"><span class="icon">⚡</span> Instant download na betaling</div>
+    <div class="usp-item"><span class="icon">🔒</span> Veilig betalen via Gumroad</div>
+    <div class="usp-item"><span class="icon">♾️</span> Onbeperkt opnieuw downloaden</div>
+    <div class="usp-item"><span class="icon">📱</span> Werkt op elke telefoon & laptop</div>
+  </div>
 
-        if (firebaseConfigRaw) {
-            try {
-                firebaseConfig = JSON.parse(firebaseConfigRaw);
-                if (firebaseConfig.apiKey) isFirebaseConfigured = true;
-            } catch (e) { console.log("Geen externe config, start lokaal."); }
-        }
+  <!-- PRODUCTEN -->
+  <div class="section-title" id="producten">
+    <h2>Onze producten</h2>
+    <p>Kies een product, betaal en download direct als PDF</p>
+  </div>
 
-        const appId = window.__app_id || 'prezzotax-v1';
-        const geminiApiKey = ""; // Wordt runtime gevuld
+  <div class="products">
 
-        let app, auth, db;
-        if (isFirebaseConfigured) {
-            try {
-                app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-            } catch(e) { 
-                console.error("Firebase init failed:", e); 
-                isFirebaseConfigured = false;
-            }
-        }
+    <!-- PRODUCT 1 – PLACEHOLDER -->
+    <div class="card">
+      <div class="card-img">📅</div>
+      <div class="card-body">
+        <h3>Weekplanner 2026 <span class="badge-nieuw">NIEUW</span></h3>
+        <p>Organiseer je week overzichtelijk. Inclusief dagindeling, boodschappenlijst en notitieruimte. Print thuis of gebruik digitaal.</p>
+      </div>
+      <div class="card-footer">
+        <div class="price">€2,99 <span>/ PDF</span></div>
+        <!-- Vervang href met jouw Gumroad product link -->
+        <a href="https://gumroad.com" class="btn-koop" target="_blank">Kopen →</a>
+      </div>
+    </div>
 
-        // --- Logo ---
-        const PrezzotaxLogo = ({ size = 44, showText = true }) => (
-            <div className="flex items-center gap-3 group shrink-0">
-                <div style={{ width: size, height: size }} className="relative flex items-center justify-center rounded-full overflow-hidden border border-slate-200 bg-white shadow-md transition-transform group-hover:scale-105">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                        <circle cx="50" cy="50" r="50" fill="white"/>
-                        <path d="M30 68C21 68 14 61 14 52C14 43 21 36 30 36C31 36 32 36 33.5 36.5C37 28 45 23 54 23C65 23 74 31 75.5 41.5C76.5 41 78 41 79.5 41C87 41 93 47 93 54.5C93 62 87 68 79.5 68L30 68Z" fill="#1A314D" />
-                        <path d="M30 65C23 65 18 60 18 53C18 46 23 41 30 41C31 41 32 41 33 41.5C36 35 43 30 51 30C60 30 67 36 68.5 44.5C69.5 44 70.5 44 71.5 44C77.5 44 82 48.5 82 54.5C82 60.5 77.5 65 71.5 65L30 65Z" fill="#00B4D8" opacity="0.8" />
-                        <path d="M50 38C52 38 54 39.5 54 41.5C54 43 53 44 51.5 44.5L68 56C69 57 69 59 68 60.5C67 62 65 62 64 61L50 51L36 61C35 62 33 62 32 60.5C31 59 31 57 32 56L48.5 44.5C47 44 46 43 46 41.5C46 39.5 48 38 50 38Z" stroke="#FDBA74" strokeWidth="2.5" strokeLinecap="round" />
-                        <path d="M50 63V52M50 52L45 57M50 52L55 57" stroke="#22D3EE" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </div>
-                {showText && (
-                    <div className="flex flex-col text-left">
-                        <span className="font-black text-2xl tracking-tighter leading-none text-slate-900 uppercase italic">prezzo<span className="text-cyan-500">tax</span></span>
-                        <span className="text-[7px] font-bold text-slate-400 uppercase tracking-[0.15em] mt-1">YOUR STYLE. YOUR STORY.</span>
-                    </div>
-                )}
-            </div>
-        );
+    <!-- PRODUCT 2 – PLACEHOLDER -->
+    <div class="card">
+      <div class="card-img">🍽️</div>
+      <div class="card-body">
+        <h3>Maaltijdplanner <span class="badge-nieuw">NIEUW</span></h3>
+        <p>Plan je maaltijden voor de hele week. Met boodschappenlijst, calorieën bijhouden en receptruimte. Ideaal voor gezinnen.</p>
+      </div>
+      <div class="card-footer">
+        <div class="price">€3,49 <span>/ PDF</span></div>
+        <!-- Vervang href met jouw Gumroad product link -->
+        <a href="https://gumroad.com" class="btn-koop" target="_blank">Kopen →</a>
+      </div>
+    </div>
 
-        const compressImage = (base64Str) => {
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.src = base64Str;
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    let width = img.width; let height = img.height;
-                    if (width > 800) { height *= 800 / width; width = 800; }
-                    canvas.width = width; canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-                    resolve(canvas.toDataURL('image/jpeg', 0.7));
-                };
-                img.onerror = () => resolve(base64Str);
-            });
-        };
+    <!-- PRODUCT 3 – PLACEHOLDER -->
+    <div class="card">
+      <div class="card-img">💰</div>
+      <div class="card-body">
+        <h3>Budget tracker</h3>
+        <p>Houd je maandelijkse inkomsten en uitgaven bij. Overzichtelijk, simpel en direct te printen of invullen op je tablet.</p>
+      </div>
+      <div class="card-footer">
+        <div class="price">€2,49 <span>/ PDF</span></div>
+        <!-- Vervang href met jouw Gumroad product link -->
+        <a href="https://gumroad.com" class="btn-koop" target="_blank">Kopen →</a>
+      </div>
+    </div>
 
-        const App = () => {
-            const [user, setUser] = useState(null);
-            const [useLocalMode, setUseLocalMode] = useState(!isFirebaseConfigured);
-            const [inventory, setInventory] = useState([]);
-            const [messages, setMessages] = useState([]);
-            const [activeTab, setActiveTab] = useState('overzicht');
-            const [isAdding, setIsAdding] = useState(false);
-            const [loading, setLoading] = useState(false);
-            const [viewMode, setViewMode] = useState('edit');
-            const [communityTab, setCommunityTab] = useState('chat');
-            const [newMessage, setNewMessage] = useState('');
-            const [selectedItem, setSelectedItem] = useState(null);
-            const fileInputRef = useRef(null);
+  </div>
 
-            const [formData, setFormData] = useState({
-                title: '', brand: '', size: '', color: '', material: '', condition: 'Heel goed',
-                marketListingPrice: '', marketSoldPrice: '', aiTargetPrice: '', 
-                description_nl: '', description_en: '', description_fr: '',
-                hashtags: '', images: [], status: 'beschikbaar'
-            });
+  <!-- HOE WERKT HET -->
+  <section class="how" id="hoe-werkt-het">
+    <h2>Hoe werkt het?</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Kies een product</h4>
+        <p>Bekijk ons aanbod en klik op de gewenste PDF.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>Betaal veilig</h4>
+        <p>Betaal via iDEAL, creditcard of PayPal via Gumroad.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>Download direct</h4>
+        <p>Je ontvangt direct een downloadlink. Geen wachttijd!</p>
+      </div>
+    </div>
+  </section>
 
-            // Stats
-            const myStats = useMemo(() => {
-                const value = inventory.reduce((acc, curr) => acc + (parseFloat(curr.aiTargetPrice) || 0), 0);
-                return { total: inventory.length, value };
-            }, [inventory]);
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Prezzo<span>Tax</span></div>
+    <p style="margin-bottom:12px">Digitale downloads – snel, simpel en betaalbaar</p>
+    <div>
+      <a href="#">Privacybeleid</a>
+      <a href="#">Algemene voorwaarden</a>
+      <a href="mailto:info@prezzotax.nl">Contact</a>
+    </div>
+    <p style="margin-top:16px">© 2026 PrezzoTax. Alle rechten voorbehouden.</p>
+  </footer>
 
-            // --- LOCAL STORAGE ---
-            const saveLocal = (items) => {
-                localStorage.setItem('prezzotax_inv', JSON.stringify(items));
-                setInventory(items);
-            }
-            const loadLocal = () => {
-                const d = localStorage.getItem('prezzotax_inv');
-                return d ? JSON.parse(d) : [];
-            }
-
-            // --- INIT ---
-            useEffect(() => {
-                if (useLocalMode) {
-                    setUser({ uid: 'local_user', isAnonymous: true });
-                    setInventory(loadLocal());
-                    setMessages([{ id: 1, text: "Welkom in Lokale Modus!", userName: "SYS", isImportant: true, createdAt: {seconds: Date.now()/1000}}]);
-                } else {
-                    signInAnonymously(auth).catch(e => {
-                        console.error("Auth failed, switching to local", e);
-                        setUseLocalMode(true);
-                    });
-                    onAuthStateChanged(auth, setUser);
-                }
-            }, [useLocalMode]);
-
-            // --- DATA SYNC ---
-            useEffect(() => {
-                if (useLocalMode || !user || !user.uid) return;
-
-                // Inventory
-                const unsubInv = onSnapshot(collection(db, 'artifacts', appId, 'users', user.uid, 'inventory'), 
-                    (snap) => setInventory(snap.docs.map(d => ({ id: d.id, ...d.data() }))),
-                    (err) => {
-                        console.error("Inventory Access Denied", err);
-                        setUseLocalMode(true); // Fallback if perm denied
-                    }
-                );
-
-                // Messages
-                const unsubMsg = onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'messages'),
-                    (snap) => setMessages(snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a,b) => (a.createdAt?.seconds||0)-(b.createdAt?.seconds||0))),
-                    (err) => console.log("Message Access Denied (Non-fatal)")
-                );
-
-                return () => { unsubInv(); unsubMsg(); };
-            }, [user, useLocalMode]);
-
-            useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [activeTab, isAdding, viewMode, inventory, messages, communityTab]);
-
-            // --- HANDLERS ---
-            const handleImage = async (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                setLoading(true);
-                const reader = new FileReader();
-                reader.onload = async (event) => {
-                    const base64 = event.target.result;
-                    const compressed = await compressImage(base64);
-                    setFormData(prev => ({ ...prev, images: [compressed, ...prev.images] }));
-                    await analyze(compressed);
-                };
-                reader.readAsDataURL(file);
-            };
-
-            const analyze = async (base64) => {
-                const base64Data = base64.split(',')[1];
-                const mimeType = base64.split(';')[0].split(':')[1];
-                const prompt = `Analyseer foto voor Prezzotax. 3 Prijzen + NL/EN/FR teksten. JSON format only: {"title":"...","brand":"","size":"","color":"","material":"","condition":"","marketListingPrice":0,"marketSoldPrice":0,"aiTargetPrice":0,"description_nl":"","description_en":"","description_fr":"","hashtags":""}`;
-                
-                try {
-                    if (!geminiApiKey) throw new Error("No API Key");
-                    const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${geminiApiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }, { inlineData: { mimeType: 'image/jpeg', data: base64Data } }] }] })
-                    });
-                    const data = await resp.json();
-                    const ai = JSON.parse(data.candidates[0].content.parts[0].text.replace(/```json/g, '').replace(/```/g, ''));
-                    setFormData(prev => ({ 
-                        ...prev, ...ai, 
-                        marketListingPrice: ai.marketListingPrice?.toString(),
-                        marketSoldPrice: ai.marketSoldPrice?.toString(),
-                        aiTargetPrice: ai.aiTargetPrice?.toString()
-                    }));
-                } catch (e) { 
-                    console.log("AI Sim mode");
-                    // Mock data als AI faalt (of geen key)
-                    setTimeout(() => {
-                        setFormData(prev => ({...prev, title: "Vintage Item (Demo)", brand: "Prezzo", size: "M", marketListingPrice: "25", marketSoldPrice: "18", aiTargetPrice: "20", description_nl: "Voorbeeld tekst.", description_en: "Sample text.", description_fr: "Exemple.", hashtags: "#demo #vintage"}));
-                        setLoading(false);
-                    }, 1000);
-                    return; 
-                } 
-                setLoading(false);
-            };
-
-            const save = async () => {
-                const docData = { ...formData, updatedAt: new Date().toISOString() };
-                if (useLocalMode) {
-                    const newInv = [...inventory];
-                    if (selectedItem) {
-                        const idx = newInv.findIndex(i => i.id === selectedItem.id);
-                        if(idx > -1) newInv[idx] = { ...docData, id: selectedItem.id };
-                    } else {
-                        newInv.push({ ...docData, id: Date.now().toString() });
-                    }
-                    saveLocal(newInv);
-                } else {
-                    if (selectedItem) await updateDoc(doc(db, 'artifacts', appId, 'users', user.uid, 'inventory', selectedItem.id), docData);
-                    else await addDoc(collection(db, 'artifacts', appId, 'users', user.uid, 'inventory'), docData);
-                }
-                setIsAdding(false); setSelectedItem(null); setActiveTab('magazijn');
-            };
-
-            const handleDelete = async (id) => {
-                if (useLocalMode) {
-                    saveLocal(inventory.filter(i => i.id !== id));
-                } else {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'users', user.uid, 'inventory', id));
-                }
-            };
-
-            const sendChat = async (important = false) => {
-                if (!newMessage.trim()) return;
-                const msg = { text: newMessage, userId: user.uid, userName: "YOU", isImportant: important, createdAt: {seconds: Date.now()/1000} };
-                if (useLocalMode) {
-                    setMessages(p => [...p, { ...msg, id: Date.now() }]);
-                } else {
-                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'messages'), { ...msg, createdAt: serverTimestamp() });
-                }
-                setNewMessage('');
-            };
-
-            const copy = (t) => {
-                const el = document.createElement('textarea'); el.value = t; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
-            };
-
-            const getFullDescription = () => `[NEDERLANDS]\n${formData.description_nl}\n\n[ENGLISH]\n${formData.description_en}\n\n[FRANÇAIS]\n${formData.description_fr}\n\n${formData.hashtags}`;
-
-            if (!user) return <div className="h-screen bg-[#1A314D] flex flex-col items-center justify-center text-white font-bold gap-4"><PrezzotaxLogo size={100} showText={false} /><div className="animate-pulse">Starten...</div></div>;
-
-            return (
-                <div className="min-h-screen pb-32">
-                    <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-40 h-24 flex items-center px-6 justify-between">
-                        <div className="flex items-center gap-4">
-                            <PrezzotaxLogo />
-                            {useLocalMode && <span className="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[10px] font-bold border border-amber-200 uppercase tracking-wide">Offline Modus</span>}
-                        </div>
-                        <button onClick={() => { setIsAdding(true); setViewMode('edit'); setFormData({title: '', brand: '', size: '', color: '', material: '', condition: 'Heel goed', marketListingPrice: '', marketSoldPrice: '', aiTargetPrice: '', description_nl: '', description_en: '', description_fr: '', hashtags: '', images: [], status: 'beschikbaar'}); }} className="bg-[#1A314D] text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 active:scale-95 transition-all shadow-lg hover:bg-slate-800 shrink-0">
-                            <i data-lucide="plus" className="text-cyan-400 w-5 h-5"></i> <span className="hidden sm:inline">Nieuw</span>
-                        </button>
-                    </header>
-
-                    <main className="max-w-6xl mx-auto p-6">
-                        {activeTab === 'overzicht' && (
-                            <div className="space-y-12 animate-in fade-in duration-700">
-                                <div className="bg-slate-900 rounded-[3rem] p-10 text-white relative overflow-hidden flex flex-col md:flex-row items-center gap-10 shadow-2xl">
-                                    <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
-                                    <div className="p-6 bg-white/5 rounded-full backdrop-blur-md border border-white/10 shadow-2xl"><PrezzotaxLogo size={140} showText={false} /></div>
-                                    <div className="flex-1 text-center md:text-left relative z-10">
-                                        <h1 className="text-4xl font-black uppercase italic tracking-tighter mb-4 leading-tight">De Prijs Meester</h1>
-                                        <p className="text-slate-300 text-lg mb-6 leading-relaxed max-w-2xl">Wij analyseren de markt. Jij ziet wat anderen vragen, waarvoor het verkocht wordt, en onze slimme adviesprijs.</p>
-                                        <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                                            <button onClick={() => setIsAdding(true)} className="bg-cyan-500 text-slate-900 px-10 py-4 rounded-2xl font-black uppercase italic active:scale-95 transition-all shadow-lg">Start Scan</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                    <div className="bg-white p-8 rounded-[2.5rem] border shadow-sm">
-                                        <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 italic">Kluis Waarde</h4>
-                                        <div className="text-4xl font-black text-emerald-600">€{myStats.value.toFixed(0)}</div>
-                                    </div>
-                                    <div className="bg-white p-8 rounded-[2.5rem] border shadow-sm">
-                                        <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 italic">Aantal Items</h4>
-                                        <div className="text-4xl font-black text-[#1A314D]">{myStats.total}</div>
-                                    </div>
-                                    <div className="bg-[#1A314D] p-8 rounded-[2.5rem] text-white flex items-center justify-between">
-                                        <div><div className="text-cyan-400 text-[10px] font-black uppercase mb-1">Opslag</div><div className="text-2xl font-black italic uppercase">{useLocalMode ? 'Lokaal' : 'Cloud'}</div></div>
-                                        <i data-lucide="sparkles" className="text-white opacity-20 w-12 h-12"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {activeTab === 'magazijn' && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                                {inventory.map(item => (
-                                    <div key={item.id} className="bg-white rounded-[3.5rem] border overflow-hidden shadow-sm hover:shadow-2xl transition-all group flex flex-col relative">
-                                        <div className="h-72 bg-slate-100 relative overflow-hidden">
-                                            {item.images?.[0] && <img src={item.images[0]} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />}
-                                            <div className="absolute top-6 left-6 bg-slate-900/90 backdrop-blur-md px-4 py-2 rounded-xl text-[10px] font-black text-cyan-400 uppercase tracking-widest">{item.brand || 'PREZZOTAX'}</div>
-                                            <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2 rounded-xl text-sm font-black italic shadow-md">€{item.aiTargetPrice}</div>
-                                            <button onClick={() => handleDelete(item.id)} className="absolute top-6 right-6 p-4 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-xl"><i data-lucide="trash-2" className="w-5 h-5"></i></button>
-                                        </div>
-                                        <div className="p-8 space-y-6 flex-1 flex flex-col">
-                                            <h3 className="font-black uppercase italic truncate text-[#1A314D] text-xl">{item.title}</h3>
-                                            <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50 p-3 rounded-xl">
-                                                <div className="text-center"><span>Markt Vraag</span><div className="text-slate-900 text-sm">€{item.marketListingPrice}</div></div>
-                                                <div className="text-center border-l border-slate-200 pl-3"><span>Markt Verkoop</span><div className="text-emerald-500 text-sm">€{item.marketSoldPrice}</div></div>
-                                            </div>
-                                            <div className="mt-auto grid grid-cols-2 gap-4 pt-4 border-t border-slate-50">
-                                                <button onClick={() => { setSelectedItem(item); setFormData(item); setIsAdding(true); setViewMode('edit'); }} className="py-3 bg-slate-50 rounded-xl font-bold text-xs text-slate-600 hover:bg-slate-100">Details</button>
-                                                <button onClick={() => { setSelectedItem(item); setFormData(item); setIsAdding(true); setViewMode('preview'); }} className="py-3 bg-slate-900 text-white rounded-xl font-black italic text-xs uppercase shadow-lg">Listing</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-
-                        {activeTab === 'community' && (
-                            <div className="h-[75vh] flex flex-col space-y-6 animate-in fade-in">
-                                <div className="flex items-center justify-between shrink-0">
-                                    <h2 className="text-3xl font-black italic uppercase text-[#1A314D]">Community</h2>
-                                    <div className="flex bg-white p-1 rounded-2xl border shadow-sm">
-                                        <button onClick={() => setCommunityTab('chat')} className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase transition-all ${communityTab === 'chat' ? 'bg-slate-900 text-white' : 'text-slate-400'}`}>Algemeen</button>
-                                        <button onClick={() => setCommunityTab('belangrijk')} className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase transition-all ${communityTab === 'belangrijk' ? 'bg-cyan-500 text-white' : 'text-slate-400'}`}>Vragen</button>
-                                    </div>
-                                </div>
-                                <div className="flex-1 bg-white rounded-[3.5rem] border shadow-2xl flex flex-col overflow-hidden">
-                                    <div className="flex-1 overflow-y-auto p-10 space-y-8 bg-slate-50/50 custom-scrollbar">
-                                        {messages.filter(m => communityTab === 'belangrijk' ? m.isImportant : !m.isImportant).map(m => (
-                                            <div key={m.id} className={`flex flex-col ${m.userId === user?.uid ? 'items-end' : 'items-start'}`}>
-                                                <span className="text-[9px] font-black text-slate-300 uppercase mb-2 px-3">{m.userName || "User"}</span>
-                                                <div className={`p-6 rounded-[2rem] max-w-[85%] shadow-sm relative ${m.userId === user?.uid ? 'bg-slate-900 text-white rounded-tr-none' : 'bg-white border rounded-tl-none'}`}>
-                                                    {m.isImportant && <i data-lucide="star" className="w-4 h-4 text-cyan-400 mb-3 fill-current absolute -top-2 -left-2"></i>}
-                                                    <p className="text-sm font-medium leading-relaxed">{m.text}</p>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="p-8 bg-white border-t flex gap-4">
-                                        <input value={newMessage} onChange={e => setNewMessage(e.target.value)} onKeyDown={e => e.key === 'Enter' && sendChat(communityTab === 'belangrijk')} className="flex-1 bg-slate-50 border-none rounded-[2rem] px-8 py-5 font-bold outline-none focus:ring-4 ring-cyan-100 shadow-inner" placeholder="Type je bericht..." />
-                                        <button onClick={() => sendChat(communityTab === 'belangrijk')} className="w-16 h-16 bg-slate-900 text-cyan-400 rounded-full flex items-center justify-center shadow-xl active:scale-90 transition-all"><i data-lucide="send" style={{width:24, height: 24}}></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                        
-                        {activeTab === 'info' && (
-                            <div className="space-y-12 animate-in fade-in">
-                                <h2 className="text-3xl font-black italic uppercase text-[#1A314D] tracking-tighter">Markt Strategie</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div className="bg-slate-900 p-10 rounded-[3rem] text-white shadow-xl relative overflow-hidden">
-                                        <h3 className="text-2xl font-black italic text-cyan-400 mb-6 uppercase">Prijzen Analyse</h3>
-                                        <p className="text-slate-300 mb-4">De AI berekent nu 3 waardes voor elk item:</p>
-                                        <ul className="space-y-4">
-                                            <li className="bg-white/5 p-4 rounded-2xl border border-white/10 flex justify-between"><span className="text-sm font-bold">Markt Vraagprijs</span><span className="text-xs text-slate-400 uppercase tracking-widest">Wat concurrenten vragen</span></li>
-                                            <li className="bg-white/5 p-4 rounded-2xl border border-white/10 flex justify-between"><span className="text-sm font-bold text-emerald-400">Markt Verkoopprijs</span><span className="text-xs text-slate-400 uppercase tracking-widest">Wat kopers echt betalen</span></li>
-                                            <li className="bg-white/5 p-4 rounded-2xl border border-white/10 flex justify-between"><span className="text-sm font-bold text-cyan-400">Prezzotax Advies</span><span className="text-xs text-slate-400 uppercase tracking-widest">Jouw sweet spot</span></li>
-                                        </ul>
-                                    </div>
-                                    <div className="bg-white p-10 rounded-[3rem] border shadow-xl">
-                                        <h3 className="text-2xl font-black italic text-[#1A314D] mb-6 uppercase">Vinted Kalender</h3>
-                                        <div className="space-y-3">
-                                            {['Januari: Wintersport', 'Maart: Lentejassen', 'Mei: Zomerjurken', 'September: Truien'].map(t => (
-                                                <div key={t} className="p-3 bg-slate-50 rounded-xl text-xs font-black uppercase text-slate-500">{t}</div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </main>
-
-                    {/* Editor Modal */}
-                    {isAdding && (
-                        <div className="fixed inset-0 bg-slate-900/95 backdrop-blur-3xl z-50 flex items-center justify-center p-4">
-                            <div className="bg-white w-full max-w-6xl rounded-[4.5rem] overflow-hidden flex flex-col max-h-[95vh] shadow-3xl relative animate-in zoom-in-95 duration-500 text-left">
-                                <button onClick={() => setIsAdding(false)} className="absolute top-12 right-12 p-4 bg-slate-100 rounded-full hover:bg-slate-200 transition-all z-10"><i data-lucide="x" style={{width:24, height: 24}}></i></button>
-                                <div className="p-16 pb-10 flex gap-12 border-b border-slate-50">
-                                    <button onClick={() => setViewMode('edit')} className={`text-4xl font-black tracking-tight italic uppercase transition-all ${viewMode === 'edit' ? 'text-slate-900 underline decoration-cyan-400 decoration-8 underline-offset-8' : 'text-slate-300 hover:text-slate-400'}`}>Formulier</button>
-                                    <button onClick={() => setViewMode('preview')} className={`text-4xl font-black tracking-tight italic uppercase transition-all ${viewMode === 'preview' ? 'text-slate-900 underline decoration-cyan-400 decoration-8 underline-offset-8' : 'text-slate-300 hover:text-slate-400'}`}>Preview</button>
-                                </div>
-                                <div className="flex-1 overflow-y-auto p-16 space-y-16">
-                                    {viewMode === 'edit' ? (
-                                        <div className="space-y-16">
-                                            {/* 3 PRIJZEN SECTIE */}
-                                            <div className="bg-slate-50 p-10 rounded-[3rem] border border-slate-100 relative overflow-hidden">
-                                                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-slate-200 via-emerald-400 to-cyan-400"></div>
-                                                <h4 className="text-xl font-black uppercase italic text-[#1A314D] mb-8 flex items-center gap-3"><i data-lucide="tag" className="text-cyan-500"></i> Markt Analyse</h4>
-                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                                    <div className="space-y-2">
-                                                        <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-4">1. Vinted Vraagprijs</label>
-                                                        <div className="relative"><span className="absolute left-6 top-1/2 -translate-y-1/2 font-bold text-slate-400">€</span><input type="text" value={formData.marketListingPrice} onChange={e => setFormData({...formData, marketListingPrice: e.target.value})} className="w-full bg-white p-5 pl-10 rounded-[2rem] font-bold text-slate-600 border-none shadow-sm text-center" /></div>
-                                                        <p className="text-[9px] text-slate-400 text-center uppercase tracking-widest">Concurrentie</p>
-                                                    </div>
-                                                    <div className="space-y-2">
-                                                        <label className="text-[10px] font-black uppercase text-emerald-500 tracking-widest ml-4">2. Verkoopprijs</label>
-                                                        <div className="relative"><span className="absolute left-6 top-1/2 -translate-y-1/2 font-bold text-emerald-500">€</span><input type="text" value={formData.marketSoldPrice} onChange={e => setFormData({...formData, marketSoldPrice: e.target.value})} className="w-full bg-emerald-50 p-5 pl-10 rounded-[2rem] font-black text-emerald-600 border-none shadow-inner text-center" /></div>
-                                                        <p className="text-[9px] text-emerald-400 text-center uppercase tracking-widest font-bold">Realiteit</p>
-                                                    </div>
-                                                    <div className="space-y-2">
-                                                        <label className="text-[10px] font-black uppercase text-cyan-500 tracking-widest ml-4">3. Prezzotax Advies</label>
-                                                        <div className="relative"><span className="absolute left-6 top-1/2 -translate-y-1/2 font-bold text-cyan-500">€</span><input type="text" value={formData.aiTargetPrice} onChange={e => setFormData({...formData, aiTargetPrice: e.target.value})} className="w-full bg-slate-900 p-5 pl-10 rounded-[2rem] font-black text-cyan-400 border-none shadow-xl text-center" /></div>
-                                                        <p className="text-[9px] text-cyan-500 text-center uppercase tracking-widest font-bold">Jouw Winst</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="space-y-8">
-                                                <h4 className="text-[12px] font-black uppercase text-slate-300 tracking-[0.3em]">Details & Foto's</h4>
-                                                <div className="grid grid-cols-2 sm:grid-cols-5 gap-8">
-                                                    {formData.images.map((img, i) => (<div key={i} className="aspect-square rounded-[2.5rem] overflow-hidden relative border-2 border-slate-100 shadow-lg"><img src={img} className="w-full h-full object-cover" /><button onClick={() => setFormData(p => ({...p, images: p.images.filter((_, idx)=>idx!==i)}))} className="absolute top-4 right-4 p-2 bg-white/90 text-red-500 rounded-xl shadow-md"><i data-lucide="x" className="w-4 h-4"></i></button></div>))}
-                                                    <button onClick={() => fileInputRef.current.click()} className="aspect-square rounded-[2.5rem] border-4 border-dashed border-slate-100 flex flex-col items-center justify-center text-slate-300 hover:border-cyan-400 hover:bg-cyan-50/20 transition-all"><i data-lucide="camera" className="w-12 h-12 mb-2"></i><span className="text-[10px] font-black uppercase">Snap</span></button>
-                                                </div>
-                                                <input type="file" ref={fileInputRef} onChange={handleImage} className="hidden" accept="image/*" />
-                                                {loading && <div className="bg-slate-900 rounded-[3rem] p-16 flex flex-col items-center justify-center gap-8 shadow-2xl animate-pulse"><div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div><div className="font-black text-cyan-400 uppercase tracking-[0.5em] text-center italic text-xl">Scannen & Prijzen...</div></div>}
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                                <div className="space-y-4"><label className="text-[11px] font-black uppercase text-slate-400 ml-6 italic tracking-widest">Titel</label><input type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full bg-slate-50 p-8 rounded-[2.5rem] font-black italic text-xl border-none outline-none focus:ring-4 ring-cyan-100 shadow-inner" /></div>
-                                                <div className="space-y-4"><label className="text-[11px] font-black uppercase text-slate-400 ml-6 italic tracking-widest">Merk</label><input type="text" value={formData.brand} onChange={e => setFormData({...formData, brand: e.target.value})} className="w-full bg-slate-50 p-8 rounded-[2.5rem] font-black italic text-xl border-none outline-none focus:ring-4 ring-cyan-100 shadow-inner" /></div>
-                                            </div>
-                                            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-                                                {['size','color','material'].map(f => (<div key={f} className="space-y-4"><label className="text-[11px] font-black uppercase text-slate-400 ml-6 italic tracking-widest">{f.toUpperCase()}</label><input type="text" value={formData[f]} onChange={e => setFormData({...formData, [f]: e.target.value})} className="w-full p-6 rounded-[2rem] font-black text-center italic border-none outline-none shadow-inner bg-slate-50" /></div>))}
-                                            </div>
-                                            <div className="space-y-4"><label className="text-[11px] font-black uppercase text-slate-400 ml-6 italic tracking-widest">Hashtags</label><input type="text" value={formData.hashtags} onChange={e => setFormData({...formData, hashtags: e.target.value})} className="w-full bg-slate-900 text-cyan-400 p-8 rounded-[2.5rem] font-black border-none shadow-2xl focus:ring-4 ring-cyan-500/20" /></div>
-                                            <div className="grid grid-cols-1 gap-12">
-                                                <div className="space-y-4"><label className="text-[11px] font-black uppercase text-slate-400 ml-6 italic tracking-widest">NL</label><textarea rows="4" value={formData.description_nl} onChange={e => setFormData({...formData, description_nl: e.target.value})} className="w-full bg-slate-50 p-10 rounded-[3rem] font-medium leading-relaxed border-none shadow-inner" /></div>
-                                                <div className="space-y-4"><label className="text-[11px] font-black uppercase text-indigo-400 ml-6 italic tracking-widest">EN</label><textarea rows="4" value={formData.description_en} onChange={e => setFormData({...formData, description_en: e.target.value})} className="w-full bg-indigo-50/20 p-10 rounded-[3rem] font-medium leading-relaxed border-none shadow-inner" /></div>
-                                                <div className="space-y-4"><label className="text-[11px] font-black uppercase text-emerald-400 ml-6 italic tracking-widest">FR</label><textarea rows="4" value={formData.description_fr} onChange={e => setFormData({...formData, description_fr: e.target.value})} className="w-full bg-emerald-50/20 p-10 rounded-[3rem] font-medium leading-relaxed border-none shadow-inner" /></div>
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                                            <div className="space-y-10 lg:sticky lg:top-0 h-fit">
-                                                <div className="aspect-[4/5] bg-slate-100 rounded-[4rem] overflow-hidden relative shadow-3xl border-4 border-white">{formData.images[0] && <img src={formData.images[0]} className="w-full h-full object-cover" />}<div className="absolute top-10 left-10"><PrezzotaxLogo size={48} showText={false} /></div></div>
-                                                <div className="p-12 bg-white rounded-[4rem] border shadow-xl space-y-8">
-                                                    <div className="flex justify-between items-start"><h3 className="text-4xl font-black italic uppercase tracking-tighter pr-10 leading-tight">{formData.title}</h3><button onClick={() => copy(formData.title)} className="p-5 bg-slate-50 rounded-3xl text-slate-400"><i data-lucide="copy"></i></button></div>
-                                                    <div className="text-6xl font-black text-cyan-600 tracking-tighter italic leading-none">€{formData.aiTargetPrice}</div>
-                                                </div>
-                                            </div>
-                                            <div className="space-y-12">
-                                                <div className="bg-slate-900 p-12 rounded-[4.5rem] text-white space-y-10 relative overflow-hidden shadow-3xl border border-white/5">
-                                                    <div className="flex justify-between items-center relative z-10"><div className="flex items-center gap-4"><PrezzotaxLogo size={48} showText={false} /><h5 className="font-black text-[12px] uppercase tracking-[0.4em] text-slate-400 italic">Vinted Copy Block</h5></div><button onClick={() => copy(getFullDescription())} className="bg-[#00B4D8] text-white px-10 py-5 rounded-[2rem] font-black uppercase italic shadow-2xl active:scale-95 transition-all">Kopieer Alles</button></div>
-                                                    <textarea readOnly value={getFullDescription()} className="w-full h-[600px] bg-slate-800/30 border-none rounded-[3rem] p-12 text-lg text-slate-200 font-medium leading-relaxed resize-none outline-none custom-scrollbar shadow-inner" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="p-16 bg-slate-50 border-t flex gap-8 shadow-inner shrink-0"><button onClick={save} className="flex-1 bg-slate-900 text-white py-8 rounded-[3rem] font-black text-2xl italic uppercase active:scale-95 transition-all flex items-center justify-center gap-6 group shadow-3xl hover:bg-slate-800"><i data-lucide="save" className="text-cyan-400 w-10 h-10 group-hover:scale-125 transition-transform"></i> Opslaan</button></div>
-                            </div>
-                        </div>
-                    )}
-
-                    <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-900/95 backdrop-blur-3xl px-12 py-7 rounded-[4rem] flex items-center gap-10 sm:gap-20 z-50 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.7)] border border-white/10 group">
-                        {[{id:'overzicht',icon:'home',label:'Home'},{id:'magazijn',icon:'package',label:'Kast'},{id:'community',icon:'message-square',label:'Forum'},{id:'info',icon:'trending-up',label:'Trends'}].map(t => (<button key={t.id} onClick={() => setActiveTab(t.id)} className={`flex flex-col items-center gap-2 transition-all ${activeTab === t.id ? 'text-cyan-400 scale-125 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]' : 'text-slate-500 hover:text-slate-300'}`}><i data-lucide={t.icon} style={{width:30, height:30}}></i><span className="text-[8px] font-black uppercase tracking-[0.2em]">{t.label}</span></button>))}
-                    </nav>
-                </div>
-            );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
 </body>
 </html>
